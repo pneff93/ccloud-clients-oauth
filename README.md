@@ -108,6 +108,6 @@ It does not scale very well in terms of CC resources when developing new applica
 When using OAuth, you can create all applications also in Azure AD and assign them to an Azure AD group like "project A".
 Configure your token so that it contains the group information.
 In CC, only one identity pool with corresponding role bindings can represent the entire project. Ensure using the group information from the JWT token as the filter and the app id (Azure AD client id) as the claim.
-One thing to consider is to have a good topic and application naming strategy, such as project-A-<service-name>-<version>, so that you can define the role bindings for the identity pool based on that prefix.
+One thing to consider is to have a good topic and application naming strategy, such as `project-A-<service-name>-<version>`, so that you can define the role bindings for the identity pool based on that prefix.
 
 Overall instead of creating several resources (SA, API Keys), you only have one (identity pool) for the entire project. Also, you decoupled the project structure out of CC into your own identity provider. 
