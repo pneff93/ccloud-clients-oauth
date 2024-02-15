@@ -105,9 +105,9 @@ Consider you have line of business with 20 applications.
 Using API Keys, you need to create several Service Accounts with role bindings as well as 20 API Keys.
 It does not scale very well in terms of CC resources when developing new applications or entire projects, especially for large companies that might become a problem.
 
-When using OAuth, you can create all applications also in Azure AD and assign them to an Azure AD group like "LOB A".
-Configure your token so that it contains the group information.
-In CC, only one identity pool with corresponding role bindings can represent the entire project. Ensure using the group information from the JWT token as the filter and the app id (Azure AD client id) as the claim (for auditing).
+When using OAuth, you can create all applications also in Azure AD and assign them to an Azure AD group or a custom role like "LOB A".
+Configure your token so that it contains the group or role information.
+In CC, only one identity pool with corresponding role bindings can represent the entire project. Ensure using the group/role information from the JWT token as the filter and the app id (Azure AD client id) as the claim (for auditing).
 One thing to consider is to have a good topic and application naming strategy, such as `LOB-A-<service-name>-<version>`, so that you can define the role bindings for the identity pool based on that prefix.
 
 Overall instead of creating several resources (SA, API Keys), you only have one (identity pool) for the entire project. Also, you decoupled the project structure out of CC into your own identity provider. 
