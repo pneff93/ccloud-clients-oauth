@@ -1,20 +1,19 @@
 # Client OAuth with Azure AD
 
+## Recommended Resources
+* [OAuth for Confluent Cloud Documentation](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/overview.html)
+* [Getting Started with OAuth for Confluent Cloud Using Azure AD DS Article](https://www.confluent.io/en-gb/blog/configuring-azure-ad-ds-with-oauth-for-confluent/)
 
 ## Prerequisites
 
 * Confluent Platform: 7.2.1 or later; 7.1.3 or later
 * Dedicated Confluent Cloud cluster
 
-## Azure
-
-### Create Azure Active Directory (AD)
-
-![](CreateTenant.png)
+## Entra ID (Azure AD)
 
 ### Create Application
 
-On the left bar under App registrations, create a new one with the default configurations.
+In Azure AD, on the left bar under App registrations, create a new one with the default configurations.
 
 In the folowing, we will often need:
 * tenant id -> see applications overview
