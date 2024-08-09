@@ -15,7 +15,7 @@
 
 In Azure AD, on the left bar under App registrations, create a new one with the default configurations.
 
-In the folowing, we will often need:
+In the following, we will often need:
 * tenant id -> see applications overview
 * token endpoint -> see OAuth 2.0 token endpoint (v1) under endpoints under applications overview
 * client id -> see client id under applications overview
@@ -26,7 +26,7 @@ In the folowing, we will often need:
 ### Create Secrets
 
 In the application on the left bar under Certificates & secrets, create
-new client secrets. Copy the client secret value.
+new client secrets. Copy the client's secret value.
 
 ### Verify Token
 
