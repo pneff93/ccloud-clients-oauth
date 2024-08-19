@@ -22,7 +22,7 @@ In the following, we will need:
 tenant id -> see applications overview
 token endpoint -> see OAuth 2.0 token endpoint (v1) under endpoints under applications overview
 client id -> see client id under applications overview
-secret id -> see **secret value** under Certificates & secrets on the left bar
+secret id -> see secret value under Certificates & secrets on the left bar
 ```
 
 
@@ -49,7 +49,7 @@ Decode the responded `access_token` because we need the `iss` later on.
 
 ### Create Identity Provider
 
-* [Add an OAuth/OIDC Identity Provider on Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-providers.html).
+* [Add an OAuth/OIDC Identity Provider on Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-providers.html)
 
 Under accounts & access, create an identity provider using the tenant id from the Azure AD application overview.
 
@@ -62,7 +62,7 @@ Under accounts & access, create an identity provider using the tenant id from th
 
 ### Create Identity Pool
 
-* [Use Identity Pools with Your OAuth/OIDC Identity Provider on Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-pools.html#use-identity-pools-with-your-oauth-provider).
+* [Use Identity Pools with Your OAuth/OIDC Identity Provider on Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-pools.html#use-identity-pools-with-your-oauth-provider)
 
 We use as a filter `has(claims.iss)` which equals basically to no filter.
 We also give them the DeveloperWrite role and DeveloperRead role for all topics and consumer groups.
@@ -73,9 +73,9 @@ We also give them the DeveloperWrite role and DeveloperRead role for all topics 
 
 ## Configure Clients
 
-* [Configure Clients for OAuth-OIDC on Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/configure-clients-oauth.html):
+* [Configure Clients for OAuth-OIDC on Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/configure-clients-oauth.html)
 
-We create a properties file based on the
+We create the following properties file:
 ```properties
 bootstrap.servers=<bootstrap-servers>
 security.protocol=SASL_SSL
