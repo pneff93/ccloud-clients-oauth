@@ -1,10 +1,13 @@
 # Client OAuth with Azure AD
 
-## Recommended Resources
+This repository provides a ste-by-step walkthrough how to set up client authentication to Confluent Cloud
+using OAuth/OIDC.
+
+Recommended Resources
 * [OAuth for Confluent Cloud Documentation](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/overview.html)
 * [Getting Started with OAuth for Confluent Cloud Using Azure AD DS Article](https://www.confluent.io/en-gb/blog/configuring-azure-ad-ds-with-oauth-for-confluent/)
 
-## Prerequisites
+Prerequisites
 
 * Confluent Platform: 7.2.1 or later; 7.1.3 or later
 * Dedicated Confluent Cloud cluster
@@ -14,12 +17,14 @@
 ### Create Application
 
 In Azure AD, on the left bar under App registrations, create a new one with the default configurations.
+In the following, we will need:
+```
+tenant id -> see applications overview
+token endpoint -> see OAuth 2.0 token endpoint (v1) under endpoints under applications overview
+client id -> see client id under applications overview
+secret id -> see **secret value** under Certificates & secrets on the left bar
+```
 
-In the following, we will often need:
-* tenant id -> see applications overview
-* token endpoint -> see OAuth 2.0 token endpoint (v1) under endpoints under applications overview
-* client id -> see client id under applications overview
-* secret id -> see **secret value** under Certificates & secrets on the left bar
 
 ![](Application.png)
 
@@ -38,35 +43,39 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" \
 https://login.microsoftonline.com/[tenant_id]/oauth2/token
 ```
 
-
 Decode the responded `access_token` because we need the `iss` later on.
 
 ## Confluent Cloud
 
 ### Create Identity Provider
 
+* [Add an OAuth/OIDC Identity Provider on Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-providers.html).
+
 Under accounts & access, create an identity provider using the tenant id from the Azure AD application overview.
 
 * Set the `Issuer URI` to the `iss` from the decoded JWT token.
 * Set the `JWKS URI` to `https://login.microsoftonline.com/organizations/discovery/v2.0/keys`
 
-**Do not let them filled out automatically!**
+> [!NOTE]
+> Do not let them filled out automatically!
 
-More information can be found in the [documentation](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-providers.html#next-steps).
 
 ### Create Identity Pool
+
+* [Use Identity Pools with Your OAuth/OIDC Identity Provider on Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-pools.html#use-identity-pools-with-your-oauth-provider).
 
 We use as a filter `has(claims.iss)` which equals basically to no filter.
 We also give them the DeveloperWrite role and DeveloperRead role for all topics and consumer groups.
 
-More information can be found in the [documentation](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/identity-pools.html#use-identity-pools-with-your-oauth-provider).
 
 ![](IdentitiyPool.png)
 
 
 ## Configure Clients
 
-We create a properties file based on the [documentation](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/configure-clients-oauth.html):
+* [Configure Clients for OAuth-OIDC on Confluent Cloud](https://docs.confluent.io/cloud/current/access-management/authenticate/oauth/configure-clients-oauth.html):
+
+We create a properties file based on the
 ```properties
 bootstrap.servers=<bootstrap-servers>
 security.protocol=SASL_SSL
